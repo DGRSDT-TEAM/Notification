@@ -16,3 +16,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('dashboard');
 });
+
+##### Start NOTIFICATION  #####
+Route::group(['prefix' => 'admin', 'namespace' => 'Dashboard'], function () {
+
+    Route::get('/', function () {
+        return view('dashboard');
+    });
+
+    Route::group(['prefix' => 'notif'], function () {
+        Route::get('/', 'NotificationController@index')->name('notif.index');
+        Route::get('create', 'NotificationController@create')->name('notif.create');
+        Route::post('store', 'NotificationController@store')->name('notif.store');
+        Route::post('destroy', 'NotificationController@destroy')->name('notif.destroy');
+
+    });
+});
+##### End NOTIFICATION  #####
