@@ -42,7 +42,7 @@
                                     <select class="custom-select mr-sm-2" name="etablissement_id">
                                         <option selected disabled>{{trans('main_trans.choose_etab')}}...</option>
                                         @foreach($etablissement as $c)
-                                            <option  value="{{ $c->id }}">{{ $c->lib_etab_1 }}</option>
+                                            <option  value="{{ $c->id }}">{{ $c->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -54,8 +54,8 @@
                                             class="text-danger">*</span></label>
                                     <select class="custom-select mr-sm-2" name="entite_benif_id">
                                         <option selected disabled>{{trans('main_trans.choose_entite')}}...</option>
-                                        @foreach($etablissement as $c)
-                                            <option  value="{{ $c->id }}">{{ $c->lib_etab_1 }}</option>
+                                        @foreach($labos as $c)
+                                            <option  value="{{ $c->id }}">{{ $c->labo_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -80,7 +80,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>{{trans('notif.num')}} : </label>
                                     <input type="number" name="num" class="form-control">
@@ -88,10 +88,24 @@
                             </div>
 
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>{{trans('notif.montant')}} :</label>
                                     <input type="number" name="montant" class="form-control">
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>{{trans('notif.nature_notif')}} :</label>
+                                    <select class="custom-select mr-sm-2" name="nature_operation">
+                                        <option selected disabled>{{trans('notif.nature_notif')}}...</option>
+                                        @foreach($natureOperations as $c)
+                                            <option  value="{{ $c->id }}">{{ $c->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 

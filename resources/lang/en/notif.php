@@ -9,6 +9,7 @@ return [
     "add_notif" => "Ajouter un nouvelle notification",
     "validate_notif" => "Modifier cette  notification",
     "delete_notif" => "Supprimer cette notification",
+    "nature_notif" => "Nature de l'oprération",
 
 
     ###Validation ###
@@ -19,3 +20,6 @@ return [
     'label' => "Libellé",
 
 ];
+
+
+

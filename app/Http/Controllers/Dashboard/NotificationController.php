@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Notificationrequest;
 use App\Models\Etablissement;
+use App\Models\Labo;
+use App\Models\NatureNotification;
+use App\Models\NatureOperation;
 use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,13 +24,16 @@ class NotificationController extends Controller
     public function create()
     {
         $etablissement = Etablissement::all();
-        return view('dashboard.notif.create', compact('etablissement'));
+        $labos = Labo::all();
+        $natureOperations=NatureOperation::all();
+        //dd($etablissement[0]);
+        return view('dashboard.notif.create', compact('etablissement','natureOperations','labos'));
     }
 
     public function store(Notificationrequest $request)
     {
 
-        //dd($request->all());
+       // dd($request->all());
         try {
 
             DB::beginTransaction();
@@ -42,6 +48,7 @@ class NotificationController extends Controller
                 'date' => $request->date_notif,
                 'num' => $request->num,
                 'montant' => $request->montant,
+                'nature_operation' => $request->nature_operation,
                 'added_by' => 1,
             ]);
 
