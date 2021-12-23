@@ -38,11 +38,11 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="gender">{{trans('main_trans.etab')}} : <span
-                                            class="text-danger">*</span></label>
-                                    <select class="custom-select mr-sm-2" name="etablissement_id">
+                                                class="text-danger">*</span></label>
+                                    <select class="custom-select select2 mr-sm-2" name="etablissement_id" id="etab_id">
                                         <option selected disabled>{{trans('main_trans.choose_etab')}}...</option>
                                         @foreach($etablissement as $c)
-                                            <option  value="{{ $c->id }}">{{ $c->name }}</option>
+                                            <option value="{{ $c->id }}">{{ $c->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -51,11 +51,11 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="nal_id">{{trans('main_trans.entite')}} : <span
-                                            class="text-danger">*</span></label>
-                                    <select class="custom-select mr-sm-2" name="entite_benif_id">
+                                                class="text-danger">*</span></label>
+                                    <select class="custom-select select2 mr-sm-2" name="labo_id" id="labos">
                                         <option selected disabled>{{trans('main_trans.choose_entite')}}...</option>
                                         @foreach($labos as $c)
-                                            <option  value="{{ $c->id }}">{{ $c->labo_name }}</option>
+                                            <option value="{{ $c->id }}">{{ $c->labo_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -74,7 +74,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>{{trans('notif.date')}} :</label>
-                                    <input class="form-control" type="text"  id="datepicker-action" name="date_notif" data-date-format="yyyy-mm-dd">
+                                    <input class="form-control" type="text" id="datepicker-action" name="date_notif"
+                                           data-date-format="yyyy-mm-dd">
                                 </div>
                             </div>
                         </div>
@@ -83,7 +84,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>{{trans('notif.num')}} : </label>
-                                    <input type="number" name="num" class="form-control">
+                                    <input type="text" name="num" class="form-control">
                                 </div>
                             </div>
 
@@ -96,14 +97,13 @@
                             </div>
 
 
-
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>{{trans('notif.nature_notif')}} :</label>
-                                    <select class="custom-select mr-sm-2" name="nature_operation">
+                                    <select class="custom-select select2 mr-sm-2" name="nature_operation">
                                         <option selected disabled>{{trans('notif.nature_notif')}}...</option>
                                         @foreach($natureOperations as $c)
-                                            <option  value="{{ $c->id }}">{{ $c->name }}</option>
+                                            <option value="{{ $c->id }}">{{ $c->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -112,10 +112,14 @@
                         </div>
 
 
+                        <div class="row d-flex justify-content-end">
+                            <div class="col col-md-3 d-flex justify-content-end">
+                                <button class="btn btn-success btn-sm nextBtn btn-lg pull-right py-2 my-4"
+                                        type="submit">{{trans('notif.submit')}}</button>
+                            </div>
 
+                        </div>
 
-                        <button class="btn btn-success btn-sm nextBtn btn-lg pull-right"
-                                type="submit">{{trans('notif.submit')}}</button>
                     </form>
 
                 </div>
@@ -126,4 +130,35 @@
 @endsection
 @section('js')
 
+    <script>
+        $(document).ready(function () {
+            $('#etab_id').on('change', function () {
+                var etabID = $(this).val();
+                var APP_URL = {!! json_encode(url('/')) !!}
+                //console.log(etabID, APP_URL);
+                if (etabID) {
+                    $.ajax({
+                        url: APP_URL + '/admin/getCourse/' + etabID,
+                        type: "GET",
+                        data: {"_token": "{{ csrf_token() }}"},
+                        dataType: "json",
+                        success: function (data) {
+                            if (data) {
+                                $('#labos').empty();
+                                $('#labos').append('<option hidden>Choisir une  Entite</option>');
+                                $.each(data, function (key, labos) {
+                                    $('select[name="labo_id"]').append('<option value="' + key + '">' + labos.labo_name + '</option>');
+                                });
+                                console.log(data);
+                            } else {
+                                $('#labos').empty();
+                            }
+                        }
+                    });
+                } else {
+                    $('#course').empty();
+                }
+            });
+        });
+    </script>
 @endsection

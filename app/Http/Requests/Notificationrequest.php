@@ -27,11 +27,11 @@ class Notificationrequest extends FormRequest
     {
         return [
             'label' => 'required|max:255|min:7',
-            'montant' => 'nullable|integer|gt:0',
-            'num' => 'required|integer|unique:notifications,num,' . $this->id,
+            'montant' => 'nullable|gt:0',
+            'num' => 'required|unique:notifications,num,' . $this->id,
             'date_notif' => 'required|date',
-            'entite_benif_id' => 'exists:etablissements,id',
-            'etablissement_id' => 'exists:etablissements,id',
+            'etablissement_id' => 'required|exists:etabs,id',
+            'labo_id' => 'required|exists:labos,id',
 
         ];
     }
@@ -41,9 +41,12 @@ class Notificationrequest extends FormRequest
         return [
             'label.required' => trans('notif.label.required'),
             'num.montant' => 'Invalid category value.',
-            'num.numeric' => 'Invalid category value.',
-            'entite_benif_id.exists' => 'Not an existing ID',
+            'num.required' => 'le champs numéro de notification est obligatoire.',
+            'date_notif.required' => 'le champs date de notification est obligatoire.',
             'etablissement_id.exists' => 'Not an existing ID',
+            'etablissement_id.required' => 'le champs Etablisement est obligatoire',
+            'labo_id.exists' => 'Not an existing ID',
+            'labo_id.required' => 'le champs Entité est obligatoire',
         ];
     }
 

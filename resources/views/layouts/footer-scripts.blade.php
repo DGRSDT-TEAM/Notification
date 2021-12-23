@@ -29,3 +29,13 @@
 <script src="{{ URL::asset('assets/js/lobilist.js') }}"></script>
 <!-- custom -->
 <script src="{{ URL::asset('assets/js/custom.js') }}"></script>
+<script src="{{ URL::asset('assets/js/select2.js') }}"></script>
+
+
+<script>
+    $(".select2").select2( {
+        placeholder: "votre choix :)",
+        allowClear: true
+    } );
+</script>
+</script>

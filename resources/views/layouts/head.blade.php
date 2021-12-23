@@ -17,3 +17,6 @@
 @else
     <link href="{{ URL::asset('assets/css/rtl.css') }}" rel="stylesheet">
 @endif
+
+<link href="{{ URL::asset('assets/css/plugins/select2.css') }}" rel="stylesheet">
+

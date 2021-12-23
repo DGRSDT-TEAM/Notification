@@ -43,6 +43,30 @@
                     </li>
 
 
+
+
+
+
+                    <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">Configuration</li>
+
+                    <li>
+                        <a href="{{route('etabs.index')}}"><i class="ti-comments"></i><span class="right-nav-text">Etablissements
+                            </span></a>
+                    </li>
+
+                    <li>
+                        <a href="{{route('entites.index')}}"><i class="ti-comments"></i><span class="right-nav-text">Entités
+                            </span></a>
+                    </li>
+
+
+                    <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">Administration</li>
+
+                    <li>
+                        <a href="#"><i class="ti-comments"></i><span class="right-nav-text">Utilisateurs
+                            </span></a>
+                    </li>
+
                 </ul>
                 </li>
                 </ul>
